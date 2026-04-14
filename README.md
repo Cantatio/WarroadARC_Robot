@@ -1,57 +1,74 @@
-# 6-Axis Arduino Robot Arm Starter with Calibration and FK Visualizer
+# 6-Axis Arduino Robot Arm Controller
 
-This version adds:
-- persistent calibration file
-- per-joint offset and reversal controls in the GUI
-- a simple forward-kinematics module
-- a live visualizer with side and top projections
-- live estimated tool-center position (X, Y, Z in mm)
+### With Calibration, Forward Kinematics, Inverse Kinematics, and ARMLang
 
-## Files
+## Overview
 
-- `arduino/robot_arm_firmware.ino`
-- `python/robot_arm_gui.py`
-- `python/kinematics.py`
-- `python/calibration.json`
+Full-stack control system for a 6-axis servo robotic arm using Arduino +
+Python GUI.
 
-## Install
+Includes: - Manual control - Forward kinematics visualization - Inverse
+kinematics (XYZ) - Custom scripting language (ARMLang)
 
-```bash
+## Features
+
+-   6-axis servo control
+-   GUI with real-time sliders
+-   FK visualization (side + top)
+-   IK solver (XYZ + pitch)
+-   Calibration system
+-   ARMLang scripting (.armx)
+
+## Installation
+
+``` bash
 pip install pyserial
 ```
 
 ## Run
 
-```bash
+``` bash
 python python/robot_arm_gui.py
 ```
 
-## What the FK model assumes
+## Calibration
 
-This starter model treats the arm like:
-- base yaw
-- shoulder pitch
-- elbow pitch
-- wrist pitch
+-   Adjust offsets and reversal in GUI
+-   Save + send to Arduino
+-   Edit geometry in `calibration.json`
 
-Wrist roll and gripper do not change the displayed point position yet.
+## Inverse Kinematics
 
-## Geometry tuning
+-   Enter X, Y, Z, pitch
+-   Solve IK or Solve + Send
+-   Toggle elbow-up if needed
 
-Edit `python/calibration.json` and use your real arm dimensions in millimeters.
+## ARMLang (.armx)
 
-## Calibration workflow
+### Commands
 
-1. Connect to the Arduino
-2. Adjust offsets and reversed flags in the GUI
-3. Click Save Calibration File
-4. Click Send Calibration to Arduino
-5. Move sliders and compare the visualizer to the real arm
-6. Tune geometry values in calibration.json until the visualizer tracks the real mechanism well
+-   HOME, STOP
+-   WAIT `<seconds>`{=html}
+-   SPEED `<ms>`{=html}
+-   MOVE j1 j2 j3 j4 j5 j6
+-   XYZ x y z \[pitch\]
+-   XYZU x y z \[pitch\]
+-   WRIST `<angle>`{=html}
+-   GRIP `<angle>`{=html}
+-   LOG `<message>`{=html}
+-   REPEAT / ENDREPEAT
+-   label: / GOTO
 
-## Next upgrades after this
+### Example
 
-- sequence editor / playback timeline
-- inverse kinematics for XYZ targets
-- 3D rendering instead of 2D projections
-- limit-aware path generation
+``` text
+LOG Start
+SPEED 12
+HOME
+WAIT 2
+XYZ 170 0 130 0
+WAIT 1
+GRIP 90
+HOME
+LOG Done
+```
