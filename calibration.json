@@ -1,0 +1,59 @@
+{
+  "geometry": {
+    "base_height": 80.0,
+    "shoulder_length": 110.0,
+    "elbow_length": 110.0,
+    "wrist_length": 70.0,
+    "tool_length": 40.0
+  },
+  "joints": [
+    {
+      "name": "Base",
+      "min": 10,
+      "max": 170,
+      "home": 90,
+      "offset": 0,
+      "reversed": false
+    },
+    {
+      "name": "Shoulder",
+      "min": 20,
+      "max": 160,
+      "home": 90,
+      "offset": 0,
+      "reversed": true
+    },
+    {
+      "name": "Elbow",
+      "min": 15,
+      "max": 165,
+      "home": 90,
+      "offset": 0,
+      "reversed": false
+    },
+    {
+      "name": "Wrist Pitch",
+      "min": 0,
+      "max": 180,
+      "home": 90,
+      "offset": 0,
+      "reversed": false
+    },
+    {
+      "name": "Wrist Roll",
+      "min": 0,
+      "max": 180,
+      "home": 90,
+      "offset": 0,
+      "reversed": false
+    },
+    {
+      "name": "Gripper",
+      "min": 30,
+      "max": 120,
+      "home": 60,
+      "offset": 0,
+      "reversed": true
+    }
+  ]
+}
